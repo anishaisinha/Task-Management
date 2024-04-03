@@ -1,0 +1,153 @@
+<div class="container-fluid main-container" *ngIf="!showBoardView">
+    <div class="row mt-20">
+        <div class="header-box">
+            <div class="left-box">
+                <button *ngIf="showSearch == false;" class="btn btn-primary" (click)="initiateSearchForm();"><i
+                        class="fa fa-search" aria-hidden="true"></i>&nbsp;
+                    Search</button>
+            </div>
+            <div class="right-box">
+                <button class="btn btn-primary mr-3" [routerLink]="['/home/tasks', 'add']"><i class="fa fa-plus"
+                        aria-hidden="true"></i>&nbsp;Add New Task</button>
+                <!-- <button class="btn btn-primary mr-3" (click)="showBoardView = true;"><i class="fa fa-desktop"
+                        pTooltip="Board View" aria-hidden="true"></i></button> -->
+                <button class="btn btn-warning" (click)="getTaskList()"><i class="fa fa-refresh" pTooltip="Refresh List"
+                        aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="col-md-12 search-box" *ngIf="showSearch">
+            <div class="search-header">
+                <h6>Search your data...</h6>
+                <span (click)="showSearch = false"><i class="fa fa-times"></i></span>
+            </div>
+            <form [formGroup]="searchForm" class="forms">
+                <div class="row">
+                    <!-- <div class="col-md-3 form-group">
+                        <label class="form-label" for="title">Task Title</label>
+                        <div class="search-item">
+                            <input id="searchTitle" type="text" class="form-control" formControlName="title"
+                                placeholder="Enter Title">
+                            <i class="fa fa-search" (click)="searchTitle()"></i>
+                        </div>
+                    </div> -->
+                    <div class="col-md-3 form-group">
+                        <label class="form-label" for="status"> Status</label>
+                        <p-dropdown [options]="this.statusDdw" formControlName="status" placeholder="Select your option"
+                            (onChange)="searchStatus($event)"></p-dropdown>
+                    </div>
+                    <div class="col-md-3 form-group search-buttons">
+                        <button type="reset" class="btn btn-secondary mr-5" (click)="resetData()"> Reset </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table mt-2">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col" width="80" class="center-align">S.I</th>
+                        <th scope="col" width="100">Title</th>
+                        <th scope="col" width="160">Description</th>
+                        <th scope="col" width="100" class="center-align">Status</th>
+                        <th scope="col" width="80" class="center-align">Start Date</th>
+                        <th scope="col" width="80" class="center-align">End Date</th>
+                        <th scope="col" width="80" class="center-align">Estimated(Hrs)</th>
+                        <th scope="col" width="80" class="center-align">Spent(Hrs)</th>
+                        <th scope="col" width="80" class="center-align">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    <tr *ngIf="!taskList">
+                        <td colspan="7" class="center-align">No Record Found..</td>
+                    </tr>
+                    <tr *ngFor="let task of taskList; let i = index;">
+                        <td class="center-align">{{i + 1}}</td>
+                        <td>{{task.title}}</td>
+                        <td>{{task.description}}</td>
+                        <td class="center-align">
+                            <select id="{{task.id}}" class="form-select {{task.status}}" style="font-size: small;"
+                                (change)="updateStatus(task.id)">
+                                <option style="color: black;" value="{{task.status}}">{{task.status}}</option>
+                                <option style="color: black;" value="To-Do"
+                                    *ngIf="(task.status=='In Progress' || task.status=='Done')">To-Do
+                                </option>
+                                <option style="color: black;" value="In Progress"
+                                    *ngIf="(task.status=='To-Do' || task.status=='Done')">In
+                                    Progress</option>
+                                <option style="color: black;" value="Done"
+                                    *ngIf="(task.status=='To-Do' || task.status=='In Progress')">Done
+                                </option>
+                            </select>
+                        </td>
+                        <td class="center-align">{{task.startDate | date: 'mediumDate'}}</td>
+                        <td class="center-align">{{task.endDate | date: 'mediumDate'}}</td>
+                        <td class="center-align">{{task.originalEstimate}}</td>
+                        <td class="center-align">{{task.hoursSpent}}</td>
+                        <td class="center-align">
+                            <span (click)="deleteTask(task.id)"><i class="fa fa-trash table-buttons red"></i></span>
+                            <span (click)="updateTask(task.id)"><i class="fa fa-edit table-buttons gray"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid  main-container" *ngIf="showBoardView">
+    <div class="row mt-20">
+        <div class="header-box">
+            <div class="left-box">
+            </div>
+            <div class="right-box">
+                <button class="btn btn-primary" (click)="showBoardView = false;"><i class="fa fa-arrow-left"
+                        aria-hidden="true"></i>&nbsp;Back to List View</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-container">
+        <div *ngFor="let task of taskList" class="card">
+            <div class="card-body">
+                <div class="title">
+                    <div class="card-title" style="font-weight: bold;">{{task.title}} <i class="fa fa-trash"
+                            (click)="deleteTask(task.id)"></i>
+                    </div>
+                    <div class="card-text small">({{task.id}})</div>
+                </div>
+                <div class="card-text {{task.status}}">
+                    <span>Status</span>
+                    <span>{{task.status}}</span>
+                    <span><i (click)="updateTask(task.id)" class="fa fa-edit"></i></span>
+                </div>
+                <div class="card-text small">{{task.description}}</div>
+                <div class="card-text small">
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Start Date</p>
+                            <p class="box">{{task.startDate}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p>End Date</p>
+                            <p class="box">{{task.endDate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-text small">
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Estimated(hrs)</p>
+                            <p class="box">{{task.originalEstimate}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p>Spent(hrs)</p>
+                            <p class="box">{{task.hoursSpent}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

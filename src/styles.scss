@@ -1,0 +1,259 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.mr-3 {
+    margin-right: 3px !important;
+}
+.mr-5 {
+    margin-right: 5px !important;
+}
+.mr-8 {
+    margin-right: 8px !important;
+}
+.mr-10 {
+    margin-right: 10px !important;
+}
+.mr-20 {
+    margin-right: 20px !important;
+}
+
+.mt-2 {
+    margin-top: 2px !important;
+}
+.mt-3 {
+    margin-top: 3px !important;
+}
+.mt-5 {
+    margin-top: 5px !important;
+}
+.mt-8 {
+    margin-top: 8px !important;
+}
+.mt-10 {
+    margin-top: 10px !important;
+}
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+button:disabled,
+button[disabled] {
+    cursor: not-allowed !important;
+    background-color: gray !important;
+    pointer-events: all !important;
+}
+
+.main-container {
+    .header-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-left: 0px;
+        padding-right: 0px;
+        .left-box {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .right-box {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+
+    .table-responsive {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    table {
+        table-layout: fixed;
+        // width: 100% !important;
+        overflow: auto;
+
+        .left-align {
+            text-align: left !important;
+        }
+        .right-align {
+            text-align: right !important;
+        }
+        .center-align {
+            text-align: center !important;
+        }
+        tbody {
+            .active {
+                background: #dedede;
+                color: black !important;
+            }
+            tr:hover {
+                background: #e7e7e7;
+                color: black !important;
+            }
+        }
+    }
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+        // overflow: scroll;
+        border: 1px solid #f1efef !important;
+        word-break: break-word;
+        overflow: hidden;
+        font-size: 12px;
+
+        .table-buttons {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+            margin: 2px;
+            width: 40px;
+            &.red {
+                background: #9c0000;
+                color: white;
+                border: #9c0000;
+                font-size: 14px;
+              
+            }
+            &.gray {
+                background: #e0e7e8;
+                color: black;
+                border: #137284;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .table th {
+        overflow: auto !important;
+        resize: horizontal !important;
+        background-color: #d8f2ff !important;
+    }
+
+    .btn {
+        text-transform: uppercase;
+        font-size: 11px !important;
+    }
+
+    .btn-primary {
+        position: relative;
+        color: #fff;
+        background-color: #0b2233 !important;
+        border-color: #0b2233 !important;
+    }
+
+    .btn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .form-group {
+        margin-bottom: 25px !important;
+        .reqStar::before {
+            content: "*";
+            color: red;
+        }
+        .form-label {
+            margin-bottom: -2px !important;
+            i {
+                color: #1b89ff;
+                font-size: 11px;
+                cursor: pointer;
+            }
+        }
+        .form-control {
+            letter-spacing: 0.3px;
+            height: 35px !important;
+            padding: 0.375rem 8px !important;
+            border-bottom: 1px solid #c5d0e2 !important;
+            background: #ffffff 0% 0% no-repeat padding-box;
+            font-size: 12px;
+        }
+
+        .form-select {
+            letter-spacing: 0.3px;
+            padding: 0.375rem 8px !important;
+            background: #ffffff 0% 0% no-repeat padding-box;
+        }
+
+        .form-error {
+            text-align: right;
+            font-size: 11px;
+            color: red;
+            font-weight: 600;
+        }
+
+        select.form-select {
+            -webkit-appearance: menulist;
+        }
+
+        .small-right {
+            display: block;
+            text-align: right;
+        }
+
+        .info-text {
+            font-size: 11px !important;
+            color: #0570cb !important;
+        }
+
+        .text-area {
+            height: auto !important;
+        }
+
+        .alert-danger {
+            font-size: 11px !important;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .form-control:focus,
+        .btn:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        &.arraybtns {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding-top: 26px;
+        }
+    }
+
+    .p-dropdown {
+        width: 100%;
+        height: 35px !important;
+        letter-spacing: 0.3px;
+        .p-inputtext {
+            padding: 7px 7px !important;
+            font-size: 13px !important;
+        }
+    }
+
+    label {
+        color: #787474;
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .p-calendar {
+        width: 100%;
+        .p-inputtext {
+            letter-spacing: 0.3px;
+            height: 35px !important;
+            padding: 0.375rem 8px !important;
+            border-bottom: 1px solid #c5d0e2 !important;
+            background: #ffffff 0% 0% no-repeat padding-box;
+        }
+    }
+}

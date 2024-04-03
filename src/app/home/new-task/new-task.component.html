@@ -1,0 +1,117 @@
+<div class="container main-container">
+    <div class="row mt-20">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form *ngIf="this.addNewTask" [formGroup]="addNewTask" (ngSubmit)="onSubmit(this.addNewTask)">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="title">Title</label>
+                                <span class="required">*</span>
+                                <input type="text" class="form-control" id="title" placeholder="Enter title"
+                                    formControlName="title">
+                                <div *ngIf="addNewTask.controls.title.invalid && (addNewTask.controls.title.dirty 
+                                    || addNewTask.controls.title.touched)" class="form-error">
+                                    <div *ngIf="addNewTask.controls.title.errors?.required">
+                                        Title is a mandatory field.
+                                    </div>
+                                    <div *ngIf="addNewTask.controls.title.errors?.minlength">
+                                        Please enter a valid title (Min Length: 3)
+                                    </div>
+                                    <div *ngIf="addNewTask.controls.title.errors?.maxlength">
+                                        Please enter a valid title (Max Length: 50)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="status">Status</label>
+                                <span class="required">*</span>
+                                <p-dropdown [options]="this.statusDdw" formControlName="status"
+                                    placeholder="Select your option" [filter]="true" [filterBy]="'label'">
+                                </p-dropdown>
+                                <div *ngIf="addNewTask.controls.status.invalid && (addNewTask.controls.status.dirty 
+                                || addNewTask.controls.status.touched)" class="form-error">
+                                    <div *ngIf="addNewTask.controls.status.errors?.required">
+                                        Status is a mandatory field.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="form-label" for="description">Description</label>
+                                <span class="required">*</span>
+                                <input type="text" class="form-control" id="description" placeholder="Enter description"
+                                    formControlName="description">
+                                <div *ngIf="addNewTask.controls.description.invalid && (addNewTask.controls.description.dirty 
+                                    || addNewTask.controls.description.touched)" class="form-error">
+                                    <div *ngIf="addNewTask.controls.description.errors?.required">
+                                        Description is a mandatory field.
+                                    </div>
+                                    <div *ngIf="addNewTask.controls.description.errors?.minlength">
+                                        Please enter a valid description (Min Length: 5)
+                                    </div>
+                                    <div *ngIf="addNewTask.controls.description.errors?.maxlength">
+                                        Please enter a valid description (Max Length: 100)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="startDate">Start Date</label>
+                                <span class="required">*</span>
+                                <p-calendar formControlName="startDate" id="startDate" #startDt dateFormat="dd/mm/yy"
+                                    (onSelect)="start(this)"></p-calendar>
+                                <div *ngIf="addNewTask.controls.startDate.invalid && (addNewTask.controls.startDate.dirty 
+                                    || addNewTask.controls.startDate.touched)" class="form-error">
+                                    <div *ngIf="addNewTask.controls.startDate.errors?.required">
+                                        Start Date is a mandatory field.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="endDate">End Date</label>
+                                <p-calendar formControlName="endDate" id="endDate" #endDt [minDate]="this.minDate"
+                                    dateFormat="dd/mm/yy"></p-calendar>
+                                <div *ngIf="this.dateMatchError" class="form-error" style="color: rgb(66, 145, 255);">
+                                    Please Note: Entered date cannot be greater than the start date*.
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="originalEstimate">Original Estimate</label>
+                                <span class="required">*</span>
+                                <input type="number" class="form-control" id="originalEstimate" min=0
+                                    oninput="validity.valid||(value='');" placeholder="Estimated (hrs)"
+                                    formControlName="originalEstimate">
+                                <div *ngIf="addNewTask.controls.originalEstimate.invalid && (addNewTask.controls.originalEstimate.dirty 
+                                    || addNewTask.controls.originalEstimate.touched)" class="form-error">
+                                    <div *ngIf="addNewTask.controls.originalEstimate.errors?.required">
+                                        Original Estimate is a mandatory field.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label" for="hoursSpent">Hours Spent</label>
+                                <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control"
+                                    id="hoursSpent" placeholder="Spent (hrs)" formControlName="hoursSpent">
+                            </div>
+                            <div class="col-md-12 form-group text-right d-flex  justify-content-md-between">
+                                <div>
+                                    <button class="btn btn-secondary" [routerLink]="['/home/tasks', 'list']"><i
+                                            class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Go Back</button>
+                                </div>
+                                <div>
+                                    <button type="reset" class="btn btn-secondary mr-5">Reset</button>
+                                    <button type="submit" [disabled]="!this.addNewTask.valid"
+                                        class="btn btn-primary pointer">{{this.currentAction == "Add" ? "Create Task": "Update"}}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> {{successMessage}}.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

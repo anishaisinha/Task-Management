@@ -1,0 +1,52 @@
+<nav>
+    <div class="nav-container">
+        <div class="menu-head">
+            <div class="logo">
+                <img  class="logo-img" src="../assets/logo.png" alt="Task Manager">
+            </div>
+            <p class="menu-title">
+                Your Task Manager
+            </p>
+        </div>
+        <div>
+            <div class="nav-item">
+                <a [routerLink]="['/home/tasks','list']" routerLinkActive="active">
+                    <i class="fa fa-tasks" aria-hidden="true"></i> Task List
+                </a>
+            </div>
+            <div class="nav-item">
+                <a [routerLink]="['/home/tasks','add']" routerLinkActive="active">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create New Tasks
+                </a>
+            </div>
+            <div class="nav-item">
+                <a [routerLink]="['/login']" (click)="logout()" routerLinkActive="active">
+                    <i class="fa fa-power-off"></i> Logout
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</nav>
+<main>
+    <section>
+        <header class="mb-25">
+            <div class="main-header">
+                <div class="main-title">
+                    {{getMainTitleName().title}}
+                </div>
+                <div class="main-subtitle">
+                    {{getMainTitleName().subtitle}}
+                </div>
+            </div>
+            <div class="short-menus">
+                <div class="menu-box">
+                    <div class="circular-menu">
+                        <i [routerLink]="['/login']" (click)="logout()" pTooltip="Logout" class="fa fa-power-off"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <router-outlet></router-outlet>
+    </section>
+</main>

@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <div class="logo">
+        <img src="../assets/logo.png" alt="Task Manager">
+    </div>
+    <div class="text-center mt-4">
+        <h3 class="name">Task Manager</h3>
+        <h6>Please enter your credentials to proceed.</h6>
+    </div>
+    <form *ngIf="this.loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit(this.loginForm)" class="p-3 mt-3">
+        <div class="form-field">
+            <i class="fa fa-user input-icon"></i>
+            <input class="form-control" formControlName="id" type="text" name="userName" id="userName"
+                placeholder="Username">
+        </div>
+        <div class="form-field">
+            <i class="fa fa-key input-icon"></i>
+            <input class="form-control" formControlName="pwd" type="password" name="password" id="pwd"
+                placeholder="Password">
+        </div>
+        <div class="alert alert-danger" *ngIf="this.formError == true">
+            {{this.errorText}}
+        </div>
+        <div>
+            <button type="submit" class="btn mt-3" [disabled]="!this.loginForm.valid">Login</button>
+        </div>
+    </form>
+</div>
