@@ -1,0 +1,31 @@
+Task Manager web application.
+
+This Application is built on Angular version 13.
+project dependencies set up:
+
+node version 16.10.0
+npm version 7.24.0
+angular CLI 13.3.0
+firebase 10.10.0
+bootstrap 5.3.3
+font-awsome 4.7.0
+
+
+Web-flow of application:
+1. Authentication
+	Login Page: only specefic allowed accounts are given access to the application.
+	Signup/Password reset options will be released in later versions.
+2. Home Page
+	Tasks list with all tasks are displayed after successful login.
+	options:
+		side navigation provided
+		logout action
+		status filter action
+		in-page status update action
+		create action
+		update action
+		delete action
+
+
+*this is a simple single page application
+more features(profile, board view, add user) will be updated in the later release.
